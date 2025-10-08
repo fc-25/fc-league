@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بطولات فيفا 26</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <i class="fas fa-trophy"></i>
+                    <span>بطولات فيفا 26</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#tournaments">البطولات</a></li>
+                    <li><a href="#register">التسجيل</a></li>
+                    <li><a href="#videos">المقاطع</a></li>
+                    <li><a href="admin.html" class="admin-btn">لوحة الإدارة</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Banner -->
+    <section id="home" class="hero">
+        <div class="hero-slider">
+            <div class="slide active">
+                <img src="https://images.pexels.com/photos/274506/pexels-photo-274506.jpeg" alt="بطولة فيفا">
+                <div class="slide-content">
+                    <h1>بطولات فيفا 26</h1>
+                    <p>انضم إلى أقوى البطولات وأثبت مهاراتك</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.pexels.com/photos/1884574/pexels-photo-1884574.jpeg" alt="إعلان البطولة">
+                <div class="slide-content">
+                    <h1>بطولة الدوري</h1>
+                    <p>16 فريق يتنافسون في نظام النقاط</p>
+                </div>
+            </div>
+            <div class="slide">
+                <img src="https://images.pexels.com/photos/3621104/pexels-photo-3621104.jpeg" alt="بطولة الإقصاء">
+                <div class="slide-content">
+                    <h1>بطولة الإقصاء</h1>
+                    <p>من يخسر يخرج - لا مجال للأخطاء</p>
+                </div>
+            </div>
+        </div>
+        <div class="slider-controls">
+            <button class="prev-btn"><i class="fas fa-chevron-right"></i></button>
+            <button class="next-btn"><i class="fas fa-chevron-left"></i></button>
+        </div>
+    </section>
+
+    <!-- Tournament Types -->
+    <section id="tournaments" class="tournaments">
+        <div class="container">
+            <!-- Tournament Selection Header -->
+            <div class="tournament-selection-header">
+                <div class="selection-title">
+                    <i class="fas fa-trophy selection-icon"></i>
+                    <h2>اختيار نوع البطولة</h2>
+                    <p>اختر البطولة التي تريد الاطلاع على تفاصيلها</p>
+                </div>
+            </div>
+
+            <!-- Tournament Selection Cards -->
+            <div class="tournament-selection-grid">
+                <!-- League Tournament -->
+                <div class="tournament-selection-card" onclick="showTournamentDetails('league')">
+                    <div class="selection-card-icon">
+                        <i class="fas fa-list-ol"></i>
+                    </div>
+                    <div class="selection-card-content">
+                        <h3>بطولة الدوري الممتاز</h3>
+                        <p class="selection-subtitle">نظام الدوري الدائري</p>
+                        <div class="selection-stats">
+                            <span><i class="fas fa-users"></i> 16 فريق</span>
+                            <span><i class="fas fa-calendar"></i> 6 أسابيع</span>
+                        </div>
+                        <div class="selection-status">
+                            <span class="status-badge open">مفتوح للتسجيل</span>
+                        </div>
+                    </div>
+                    <div class="selection-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- Online Tournament -->
+                <div class="tournament-selection-card" onclick="showTournamentDetails('online')">
+                    <div class="selection-card-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <div class="selection-card-content">
+                        <h3>كأس فيفا الرقمي</h3>
+                        <p class="selection-subtitle">نظام الإقصاء المباشر</p>
+                        <div class="selection-stats">
+                            <span><i class="fas fa-users"></i> 32 لاعب</span>
+                            <span><i class="fas fa-gamepad"></i> أونلاين</span>
+                        </div>
+                        <div class="selection-status">
+                            <span class="status-badge playing">جاري اللعب</span>
+                        </div>
+                    </div>
+                    <div class="selection-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+
+                <!-- Offline Tournament -->
+                <div class="tournament-selection-card" onclick="showTournamentDetails('offline')">
+                    <div class="selection-card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="selection-card-content">
+                        <h3>بطولة الأبطال الحضورية</h3>
+                        <p class="selection-subtitle">نظام الإقصاء المباشر</p>
+                        <div class="selection-stats">
+                            <span><i class="fas fa-users"></i> 16 لاعب</span>
+                            <span><i class="fas fa-map-marker-alt"></i> الرياض</span>
+                        </div>
+                        <div class="selection-status">
+                            <span class="status-badge closed">مغلق</span>
+                        </div>
+                    </div>
+                    <div class="selection-arrow">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tournament Details Section -->
+            <div id="tournamentDetailsSection" class="tournament-details-section" style="display: none;">
+                <div class="details-header">
+                    <button class="back-btn" onclick="hideTournamentDetails()">
+                        <i class="fas fa-arrow-right"></i> العودة للقائمة
+                    </button>
+                    <h3 id="selectedTournamentTitle">تفاصيل البطولة</h3>
+                </div>
+                
+                <div class="tournament-details-tabs">
+                    <button class="details-tab-btn active" data-tab="overview-inline">نظرة عامة</button>
+                    <button class="details-tab-btn" data-tab="standings-inline">الترتيب</button>
+                    <button class="details-tab-btn" data-tab="matches-inline">المباريات</button>
+                    <button class="details-tab-btn" data-tab="schedule-inline">الجدول الزمني</button>
+                </div>
+                
+                <div class="tournament-details-content">
+                    <!-- Overview Tab -->
+                    <div id="overview-inline" class="details-tab-pane active">
+                        <div class="tournament-overview">
+                            <div class="overview-grid">
+                                <div class="overview-card">
+                                    <i class="fas fa-info-circle"></i>
+                                    <h4>معلومات البطولة</h4>
+                                    <div id="tournamentInfoInline"></div>
+                                </div>
+                                <div class="overview-card">
+                                    <i class="fas fa-gift"></i>
+                                    <h4>الجوائز</h4>
+                                    <div id="tournamentPrizesInline"></div>
+                                </div>
+                                <div class="overview-card">
+                                    <i class="fas fa-gavel"></i>
+                                    <h4>القوانين</h4>
+                                    <div id="tournamentRulesInline"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Standings Tab -->
+                    <div id="standings-inline" class="details-tab-pane">
+                        <div class="standings-container">
+                            <div id="tournamentStandingsInline"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Matches Tab -->
+                    <div id="matches-inline" class="details-tab-pane">
+                        <div class="matches-container">
+                            <div id="tournamentMatchesInline"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Schedule Tab -->
+                    <div id="schedule-inline" class="details-tab-pane">
+                        <div class="schedule-container">
+                            <div id="tournamentScheduleInline"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section id="videos" class="videos">
+        <div class="container">
+            <h2 class="section-title">مقاطع البطولة</h2>
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg" alt="مقطع البطولة">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h4>أهداف الجولة الأولى</h4>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://images.pexels.com/photos/442576/pexels-photo-442576.jpeg" alt="مقطع البطولة">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h4>ملخص المباراة النهائية</h4>
+                </div>
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <img src="https://images.pexels.com/photos/1884574/pexels-photo-1884574.jpeg" alt="مقطع البطولة">
+                        <div class="play-button">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <h4>أفضل اللحظات</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="register" class="registration">
+        <div class="container">
+            <h2 class="section-title">التسجيل في البطولة</h2>
+            <div class="registration-form-container">
+                <form id="registrationForm" class="registration-form">
+                    <div class="form-group">
+                        <label for="playerName">اسم اللاعب</label>
+                        <input type="text" id="playerName" name="playerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tournament">نوع البطولة</label>
+                        <select id="tournament" name="tournament" required>
+                            <option value="">اختر البطولة</option>
+                            <option value="league">بطولة الدوري</option>
+                            <option value="online">فيفا عن بعد</option>
+                            <option value="offline">فيفا حضوري</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="experience">مستوى الخبرة</label>
+                        <select id="experience" name="experience" required>
+                            <option value="">اختر المستوى</option>
+                            <option value="beginner">مبتدئ</option>
+                            <option value="intermediate">متوسط</option>
+                            <option value="advanced">متقدم</option>
+                            <option value="professional">محترف</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        إرسال طلب التسجيل
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>بطولات فيفا 26</h4>
+                    <p>منصة شاملة لإدارة بطولات فيفا</p>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#tournaments">البطولات</a></li>
+                        <li><a href="#register">التسجيل</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>تواصل معنا</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 بطولات فيفا 26. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
