@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Initialize Supabase for admin
 function initializeAdminSupabase() {
-    const SUPABASE_URL = import.meta.env?.VITE_SUPABASE_URL;
-    const SUPABASE_ANON_KEY = import.meta.env?.VITE_SUPABASE_ANON_KEY;
+    const SUPABASE_URL = 'https://qjfeudqrpjsygnobppmc.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqZmV1ZHFycGpzeWdub2JwcG1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5NDUyNzMsImV4cCI6MjA3NTUyMTI3M30.8Su8JnX94XZC1OSFIMk5YyAAZW2ZliW-jIf2A6X0qBE';
     
     console.log('🔗 [إدارة] محاولة الاتصال بـ Supabase...');
     console.log('📍 [إدارة] URL:', SUPABASE_URL);
