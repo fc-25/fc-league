@@ -472,9 +472,9 @@ function displayRegistrations(registrations) {
     `).join('');
 }
 
-async function approveRegistration(id) {
+window.approveRegistration = async function(id) {
     if (!supabase || !isAdminLoggedIn) return;
-    
+
     console.log('✅ [إدارة] محاولة الموافقة على التسجيل:', id);
     
     try {
@@ -502,9 +502,9 @@ async function approveRegistration(id) {
     }
 }
 
-async function rejectRegistration(id) {
+window.rejectRegistration = async function(id) {
     if (!supabase || !isAdminLoggedIn) return;
-    
+
     console.log('❌ [إدارة] محاولة رفض التسجيل:', id);
     
     try {
@@ -616,7 +616,7 @@ function updateTournamentStatus(type, current, max) {
     }
 }
 
-function manageTournament(type) {
+window.manageTournament = function(type) {
     // Switch to matches section and filter by tournament type
     switchSection('matches');
     switchMatchTab(type);
@@ -694,13 +694,13 @@ function displayMatches(matches) {
     `).join('');
 }
 
-function showAddMatchModal() {
+window.showAddMatchModal = function() {
     document.getElementById('addMatchModal').style.display = 'block';
     // Set current tournament as default
     document.getElementById('matchTournament').value = currentMatchTab;
 }
 
-function closeAddMatchModal() {
+window.closeAddMatchModal = function() {
     document.getElementById('addMatchModal').style.display = 'none';
     document.getElementById('addMatchForm').reset();
 }
@@ -752,7 +752,7 @@ async function handleAddMatch(e) {
     }
 }
 
-async function editMatch(matchId, matchType) {
+window.editMatch = async function(matchId, matchType) {
     if (!isAdminLoggedIn) return;
     
     const newTeam1 = prompt('اسم الفريق الأول:');
@@ -789,7 +789,7 @@ async function editMatch(matchId, matchType) {
     }
 }
 
-async function deleteMatch(matchId, matchType) {
+window.deleteMatch = async function(matchId, matchType) {
     if (!isAdminLoggedIn) return;
     
     if (!confirm('هل أنت متأكد من حذف هذه المباراة؟')) return;
@@ -888,6 +888,10 @@ async function updateTeamStandings(teamName, points, goalsFor, goalsAgainst) {
 }
 
 async function recalculateLeagueStandings() {
+    return await window.recalculateStandings();
+}
+
+window.recalculateStandings = async function() {
     try {
         // Clear current standings
         const { error: deleteError } = await supabase
@@ -1131,7 +1135,7 @@ function getStatusName(status) {
     }
 }
 
-function refreshRegistrations() {
+window.refreshRegistrations = function() {
     loadRegistrations();
     updatePendingBadge();
     showMessage('تم تحديث البيانات', 'success');
