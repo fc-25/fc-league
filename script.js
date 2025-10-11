@@ -333,7 +333,7 @@ function setupEventListeners() {
 }
 
 // Tournament Details Functions
-function showTournamentDetails(tournamentType) {
+window.showTournamentDetails = function(tournamentType) {
     currentTournament = tournamentType;
     
     // Hide selection grid and show details section
@@ -362,7 +362,7 @@ function showTournamentDetails(tournamentType) {
     });
 }
 
-function hideTournamentDetails() {
+window.hideTournamentDetails = function() {
     // Show selection grid and hide details section
     document.querySelector('.tournament-selection-grid').style.display = 'grid';
     document.querySelector('.tournament-selection-header').style.display = 'block';
@@ -849,14 +849,22 @@ async function updateTournamentStatuses() {
 }
 
 function updateStatusBadge(tournamentType, currentCount, maxCount) {
-    const card = document.querySelector(`.tournament-card:nth-child(${getTournamentIndex(tournamentType)})`);
+    const cards = document.querySelectorAll('.tournament-selection-card');
+    if (!cards || cards.length === 0) return;
+
+    const cardIndex = getTournamentIndex(tournamentType) - 1;
+    if (cardIndex >= cards.length) return;
+
+    const card = cards[cardIndex];
     const badge = card.querySelector('.status-badge');
-    
+
+    if (!badge) return;
+
     if (currentCount >= maxCount) {
-        badge.textContent = 'مغلق - اكتمل العدد';
+        badge.textContent = 'مغلق';
         badge.className = 'status-badge closed';
     } else if (currentCount > 0) {
-        badge.textContent = `جاري اللعب (${currentCount}/${maxCount})`;
+        badge.textContent = 'جاري اللعب';
         badge.className = 'status-badge playing';
     } else {
         badge.textContent = 'مفتوح للتسجيل';
