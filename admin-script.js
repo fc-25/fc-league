@@ -476,25 +476,28 @@ window.approveRegistration = async function(id) {
     if (!supabase || !isAdminLoggedIn) return;
 
     console.log('✅ [إدارة] محاولة الموافقة على التسجيل:', id);
-    
+    console.log('✅ [إدارة] نوع المعرف:', typeof id);
+
     try {
-        const { error } = await supabase
+        const { data, error } = await supabase
             .from('registrations')
-            .update({ 
+            .update({
                 status: 'approved',
                 updated_at: new Date().toISOString()
             })
-            .eq('id', String(id));
+            .eq('id', id)
+            .select();
         
         if (error) {
             console.error('❌ [إدارة] خطأ في الموافقة:', error);
             throw error;
         }
-        
-        console.log('✅ [إدارة] تم قبول التسجيل بنجاح');
+
+        console.log('✅ [إدارة] تم قبول التسجيل بنجاح. البيانات المحدثة:', data);
         showMessage('تم قبول طلب التسجيل بنجاح', 'success');
-        loadRegistrations();
-        updatePendingBadge();
+        await loadRegistrations();
+        await updatePendingBadge();
+        await loadOverviewData();
         
     } catch (error) {
         console.error('💥 [إدارة] خطأ في قبول الطلب:', error);
@@ -506,25 +509,27 @@ window.rejectRegistration = async function(id) {
     if (!supabase || !isAdminLoggedIn) return;
 
     console.log('❌ [إدارة] محاولة رفض التسجيل:', id);
-    
+
     try {
-        const { error } = await supabase
+        const { data, error } = await supabase
             .from('registrations')
-            .update({ 
+            .update({
                 status: 'rejected',
                 updated_at: new Date().toISOString()
             })
-            .eq('id', String(id));
+            .eq('id', id)
+            .select();
         
         if (error) {
             console.error('❌ [إدارة] خطأ في الرفض:', error);
             throw error;
         }
-        
-        console.log('✅ [إدارة] تم رفض التسجيل بنجاح');
+
+        console.log('✅ [إدارة] تم رفض التسجيل بنجاح. البيانات المحدثة:', data);
         showMessage('تم رفض طلب التسجيل', 'success');
-        loadRegistrations();
-        updatePendingBadge();
+        await loadRegistrations();
+        await updatePendingBadge();
+        await loadOverviewData();
         
     } catch (error) {
         console.error('💥 [إدارة] خطأ في رفض الطلب:', error);
