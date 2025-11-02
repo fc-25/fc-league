@@ -768,23 +768,23 @@ async function handleRegistration(e) {
         phone: formData.get('phone'),
         tournament_type: formData.get('tournament'),
         experience_level: formData.get('experience'),
-        status: 'pending',
-        created_at: new Date().toISOString()
+        status: 'pending'
     };
-    
+
     console.log('📋 بيانات التسجيل:', registrationData);
 
     try {
         const { data, error } = await supabase
             .from('registrations')
-            .insert([registrationData]);
+            .insert([registrationData])
+            .select();
 
         if (error) {
             console.error('❌ خطأ في إدراج البيانات:', error);
             throw error;
         }
 
-        console.log('✅ تم إرسال طلب التسجيل بنجاح');
+        console.log('✅ تم إرسال طلب التسجيل بنجاح:', data);
         showMessage('تم إرسال طلب التسجيل بنجاح! سيتم مراجعته قريباً.', 'success');
         registrationForm.reset();
         
