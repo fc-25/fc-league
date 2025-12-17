@@ -476,29 +476,41 @@ window.approveRegistration = async function(id) {
     if (!supabase || !isAdminLoggedIn) return;
 
     console.log('✅ [إدارة] محاولة الموافقة على التسجيل:', id);
-    console.log('✅ [إدارة] نوع المعرف:', typeof id);
 
     try {
-        const { data, error } = await supabase
-            .from('registrations')
-            .update({
-                status: 'approved',
-                updated_at: new Date().toISOString()
-            })
-            .eq('id', id)
-            .select();
-        
-        if (error) {
-            console.error('❌ [إدارة] خطأ في الموافقة:', error);
-            throw error;
+        const SUPABASE_URL = 'https://qjfeudqrpjsygnobppmc.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqZmV1ZHFycGpzeWdub2JwcG1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5NDUyNzMsImV4cCI6MjA3NTUyMTI3M30.8Su8JnX94XZC1OSFIMk5YyAAZW2ZliW-jIf2A6X0qBE';
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/registrations?id=eq.${id}`,
+            {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                    'Prefer': 'return=representation'
+                },
+                body: JSON.stringify({
+                    status: 'approved',
+                    updated_at: new Date().toISOString()
+                })
+            }
+        );
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('❌ [إدارة] خطأ في الموافقة:', errorData);
+            throw new Error(errorData.message || 'فشل التحديث');
         }
 
+        const data = await response.json();
         console.log('✅ [إدارة] تم قبول التسجيل بنجاح. البيانات المحدثة:', data);
         showMessage('تم قبول طلب التسجيل بنجاح', 'success');
         await loadRegistrations();
         await updatePendingBadge();
         await loadOverviewData();
-        
+
     } catch (error) {
         console.error('💥 [إدارة] خطأ في قبول الطلب:', error);
         showMessage('خطأ في قبول الطلب: ' + error.message, 'error');
@@ -511,26 +523,39 @@ window.rejectRegistration = async function(id) {
     console.log('❌ [إدارة] محاولة رفض التسجيل:', id);
 
     try {
-        const { data, error } = await supabase
-            .from('registrations')
-            .update({
-                status: 'rejected',
-                updated_at: new Date().toISOString()
-            })
-            .eq('id', id)
-            .select();
-        
-        if (error) {
-            console.error('❌ [إدارة] خطأ في الرفض:', error);
-            throw error;
+        const SUPABASE_URL = 'https://qjfeudqrpjsygnobppmc.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqZmV1ZHFycGpzeWdub2JwcG1jIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5NDUyNzMsImV4cCI6MjA3NTUyMTI3M30.8Su8JnX94XZC1OSFIMk5YyAAZW2ZliW-jIf2A6X0qBE';
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/registrations?id=eq.${id}`,
+            {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                    'Prefer': 'return=representation'
+                },
+                body: JSON.stringify({
+                    status: 'rejected',
+                    updated_at: new Date().toISOString()
+                })
+            }
+        );
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('❌ [إدارة] خطأ في الرفض:', errorData);
+            throw new Error(errorData.message || 'فشل التحديث');
         }
 
+        const data = await response.json();
         console.log('✅ [إدارة] تم رفض التسجيل بنجاح. البيانات المحدثة:', data);
         showMessage('تم رفض طلب التسجيل', 'success');
         await loadRegistrations();
         await updatePendingBadge();
         await loadOverviewData();
-        
+
     } catch (error) {
         console.error('💥 [إدارة] خطأ في رفض الطلب:', error);
         showMessage('خطأ في رفض الطلب: ' + error.message, 'error');
